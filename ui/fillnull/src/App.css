@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-size:20px;
 }
 
 .App-logo {
@@ -26,13 +27,26 @@
 
 .App-link {
   color: #61dafb;
+  font-size:20px;
+}
+
+.main {
+    margin-top: 25px;
 }
 
 a {
   font-family:wenquanyi bitmap song, Verdana, Arial, Helvetica;
   text-decoration:none;
-  font-size:26px;
+  font-size:18px;
   color:#444;
+}
+
+p {
+  font-size:18px;
+}
+
+h1 {
+  font-size: 22px;
 }
 
 a:hover {
@@ -46,4 +60,89 @@ a:hover {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.form {
+  background: #0e101c;
+  max-width: 400px;
+  display: inline;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+form {
+    display: inline;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 50%;
+  border-radius: 4px;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: #bdf2d2;
+}
+
+button[type="reset"]:hover,
+input[type="reset"]:hover {
+  background: #f2eebd;
+}
+
+button[type="submit"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+button[type="submit"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+.img-with-text {
+    text-align: justify;
+}
+
+.img-with-text img {
+    display: block;
+    margin: 0 auto;
+    max-height:200px;
+    max-width:300px;
+    height:auto;
+    width:auto;
+}
+
+.img-articles {
+  height: 200px;
+  width: 200px;
 }

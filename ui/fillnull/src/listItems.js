@@ -5,40 +5,47 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DescriptionIcon from '@material-ui/icons/Description';
 import InfoIcon from '@material-ui/icons/Info';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import BrushIcon from '@material-ui/icons/Brush';
 import { NavLink } from 'react-router-dom'
 
 
-export const mainListItems = (
-    <div>
-        <NavLink exact to="/words">
-        <ListItem button>
-            <ListItemIcon>
-                <DescriptionIcon />
-            </ListItemIcon>
-            <ListItemText primary="聊聊" />
-        </ListItem>
-        </NavLink>
-        <NavLink exact to="/doodle">
-        <ListItem button>
-            <ListItemIcon>
-                <BrushIcon />
-            </ListItemIcon>
-            <ListItemText primary="画画" />
-        </ListItem>
-        </NavLink>
-        <NavLink exact to="/listen">
-        <ListItem button>
-            <ListItemIcon>
-                <MusicNoteIcon />
-            </ListItemIcon>
-            <ListItemText primary="听听" />
-        </ListItem>
-        </NavLink>
-    </div>
-);
+const makeItem = (path, title) => {
+    return (
+    <NavLink exact to={path}>
+    <ListItem button>
+        <ListItemIcon>
+            <DescriptionIcon />
+        </ListItemIcon>
+        <ListItemText primary={title} />
+    </ListItem>
+    </NavLink>
+    )
+}
+
+export const mainListItems = {
+    demo: (
+        <div>
+            {makeItem("/", "首页")}
+            {makeItem("/words", "聊聊")}
+        </div>
+    ),
+    prod: (
+        <div>
+            {makeItem("/", "首页")}
+            {makeItem("/words", "聊聊")}
+            {makeItem("/doodle", "画画")}
+            {makeItem("/listen", "听听")}
+        </div>
+    ),
+    family: (
+        <div>
+            {makeItem("/", "首页")}
+            {makeItem("/dairy", "家图")}
+        </div>
+    )
+};
+
+
 
 export const secondaryListItems = (
     <div>

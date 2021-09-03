@@ -1,0 +1,7 @@
+<IfModule mod_headers.c>
+    SetEnvIf Origin "https://get\.lumeer\.io$" AccessControlAllowOrigin=$0
+    Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+    Header add Access-Control-Allow-Headers * env=AccessControlAllowOrigin
+    Header merge Vary Origin
+</IfModule>
+

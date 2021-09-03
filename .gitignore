@@ -1,11 +1,22 @@
 # Logs
 logs
 *.log
+*.save
 npm-debug.log*
+*.egg-info
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 node_modules*
+*ipynb*
+*idea
+*.zip
+*.pk
+*.cert
+*.bk
+*__pycache__
+*.pyc
+build*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
