@@ -14,8 +14,11 @@ function Article(match) {
     const hist = useHistory();
     const location = useLocation();
     const [title, setTitle] = useState("");
+    const [thumb, setThumb] = useState("");
     const [article, setArticle] = useState("");
+    const [subcategoryId, setSubcategoryId] = useState("");
     const [images, setImages] = useState([]);
+    const [created, setCreated] = useState("");
     const { articleId } = useParams();
     const category = location.pathname.split("/")[1];
 
@@ -33,16 +36,18 @@ function Article(match) {
             pathname: `/update`,
             state: {
                 title: title,
+                thumb: thumb,
                 content: article,
                 articleId: articleId,
                 category: category,
+                created: created,
+                subcategoryId: subcategoryId,
                 images: images,
             }
         })
     }
 
     useEffect(() => {
-        console.log("use effect")
         let mounted = true;
         Server.article.get(articleId)
             .then((response) => {
@@ -53,7 +58,10 @@ function Article(match) {
                         if(mounted) {
                             setTitle(articleInfo.title);
                             setArticle(response.data);
+                            setThumb(articleInfo.thumb);
                             setImages(articleInfo.attachments);
+                            setSubcategoryId(articleInfo.subcategoryId);
+                            setCreated(articleInfo.created);
                         }
                     })
                     .catch((e) => console.log(e));
@@ -71,9 +79,9 @@ function Article(match) {
             <TopBar title={title} onBack={onBack} onDelete={onDelete} onUpdate={onUpdate}/>
              <Container maxWidth="md" className="main">
             <ReactMarkdown
-            rehypePlugins={[rehypeRaw]}
+                rehypePlugins={[rehypeRaw]}
+                children={article}
             >
-              {article}
             </ReactMarkdown>
             < /Container>
             </div>

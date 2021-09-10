@@ -1,6 +1,7 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import App from './App';
+import "react-datepicker/dist/react-datepicker.css";
 
 // See https://reactjs.org/docs/strict-mode.html
 const StrictApp = () => (

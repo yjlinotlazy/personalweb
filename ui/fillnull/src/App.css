@@ -146,3 +146,68 @@ input[type="submit"] {
   height: 200px;
   width: 200px;
 }
+
+li {
+font-size: 16px;
+    margin-bottom: 0.0ex;
+	color:#4f380f;
+}
+
+quoted {
+    border: #777777 1px solid;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #ece9e1;
+    color: black;
+	text-align:center
+}
+
+blockquote {
+    text-align: center;
+    border: #777777 1px solid;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #ece9e1;
+    color: black;
+    font-family: monospace;
+}
+
+H3 {
+	font-size: 16px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	color:#666;
+	font-style:bolder;
+	padding-left:5px;
+	border-bottom: 1px solid #000;
+	border-left: 3px solid #666;
+}
+
+H2 {
+	font-size: 22px;
+	padding-left:5px;
+	font-style:bold;
+	color:#333;
+   text-align: left;
+	border-top: 1px solid #666;
+	border-left: 3px dotted #666;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+}
+
+
+h4 {
+
+ color:#666;
+ font-style:bolder;
+ font-size: 15px;
+ padding: 2px;
+	margin-top: 5px;
+
+}
+
+.react-datepicker__time-list-item {
+    width: 70px;
+    margin-left: -40px;
+    padding-left: 18px !important;
+}

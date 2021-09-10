@@ -24,4 +24,4 @@ const familyConfig = {
     user: "family",
 }
 
-export const Config = prodConfig;
+export const Config = localConfig;

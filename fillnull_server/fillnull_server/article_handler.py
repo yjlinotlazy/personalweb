@@ -9,6 +9,7 @@ from fillnull_server.models import (
     CreateArticleResponse,
     GetArticleResponse,
     GetArticlesResponse,
+    GetSubCategoriesResponse,
     DeleteArticleResponse,
     UpdateArticleResponse,
     UpdateArticleRequest,
@@ -20,13 +21,14 @@ logger.setLevel(logging.DEBUG)
 
 async def create_article(request: CreateArticleRequest) -> CreateArticleResponse:
     logger.info(request)
-    date = datetime.now().strftime("%Y-%m-%d")
+    date = request.created or datetime.now().strftime("%Y-%m-%d")
     filename = request.filename or uuid.uuid4().hex
     _verify_filename(user=request.user, filename=filename)
     query = f"""
-    insert into article (category, title, filename, created, status, user)
+    insert into article (category, subcategory_id, title, thumb, filename, created, status, user)
     values
-    ('{request.category}', '{request.title}', '{filename}', '{date}', 'active', '{request.user}')
+    ('{request.category}', {request.subcategoryId}, '{request.title}',
+    '{request.thumb}', '{filename}', '{date}', 'active', '{request.user}')
     """
     sql.run_query(query, commit=True)
 
@@ -40,7 +42,7 @@ async def create_article(request: CreateArticleRequest) -> CreateArticleResponse
     result = _get_article_by_filename(request.user, filename)
 
     # Attach images
-    _attach_images(request.attachments, results[0]["article_id"])
+    _attach_images(request.attachments, result[0]["article_id"])
     return CreateArticleResponse(articleId=result[0]["article_id"], filepath=f"{request.user}/{request.category}/{filename}.txt")
 
 
@@ -48,11 +50,11 @@ async def update_article(request: UpdateArticleRequest):
     """Update article by updating both the db entry and stored file"""
     query = f"""
     update article
-    set title = '{request.title}'
+    set title = '{request.title}', subcategory_id = {request.subcategoryId}, thumb = '{request.thumb.replace(" ", "")}',
+    created = '{request.created}'
     where article_id={request.articleId}
     """
     sql.run_query(query, fetch=False, commit=True)
-    print(request.attachments)
     _attach_images(request.attachments, request.articleId)
     article = _get_article_by_id(request.articleId)
     ftp.transfer_article(
@@ -72,8 +74,20 @@ async def get_articles(category: str, user: str) -> GetArticlesResponse:
     order by created desc, article_id desc
     """
     results = sql.run_query(query, fetch=True, commit=False)
-    return GetArticlesResponse(articles=results)
+    ## Use this method to get subcategory ranking as well
 
+    subcat = await get_subcategories(category, user)
+    return GetArticlesResponse(articles=results, subcategories=subcat.subcategories)
+
+
+async def get_subcategories(category: str, user: str) -> GetSubCategoriesResponse:
+    query = f"""
+    select * from subcategory
+    where category = '{category}'
+    and user = '{user}'
+    """
+    results = sql.run_query(query, fetch=True, commit=False)
+    return GetSubCategoriesResponse(subcategories=results)
 
 async def get_article(article_id: str) -> GetArticleResponse:
     result = _get_article_by_id(article_id)
@@ -90,9 +104,11 @@ async def get_article(article_id: str) -> GetArticleResponse:
         title=result["title"],
         filename=result["filename"],
         user=result["user"],
+        thumb=result["thumb"],
         category=result["category"],
+        subcategoryId=result["subcategory_id"],
         attachments=att_result,
-        created=result["created"].strftime("%Y%m%d"),
+        created=result["created"].strftime("%Y/%m/%d"),
     )
 
 

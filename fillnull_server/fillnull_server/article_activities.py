@@ -4,6 +4,7 @@ from fillnull_server.models import (
     DeleteArticleResponse,
     GetArticlesResponse,
     GetArticleResponse,
+    GetSubCategoriesResponse,
     UpdateArticleRequest,
     UpdateArticleResponse,
 )
@@ -35,3 +36,8 @@ async def get_articles(category: str, user: str):
 @article_router.get("/delete/{article_id}", operation_id="deleteArticle", response_model=DeleteArticleResponse)
 async def delete_article(article_id: int):
     return await handler.delete_article(article_id)
+
+
+@article_router.get("/subcategories/{user}/{category}", operation_id="getSubcategories", response_model=GetSubCategoriesResponse)
+async def get_subcategories(category: str, user: str):
+    return await handler.get_subcategories(category=category, user=user)

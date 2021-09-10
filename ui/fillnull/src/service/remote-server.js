@@ -43,6 +43,9 @@ export const Server = {
                 }
             })
         },
+        subCategories(category) {
+            return client.get(`article/subcategories/${Config.user}/${category}`);
+        },
         delete(articleId) {
             return client.get(`article/delete/${articleId}`)
         }

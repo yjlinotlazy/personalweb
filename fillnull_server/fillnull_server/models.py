@@ -11,11 +11,14 @@ class AuthenticationResponse(BaseModel):
 
 class CreateArticleRequest(BaseModel):
     category: str = "words"
+    subcategoryId: str
     title: str
     filename: str = None
+    thumb: str = None
     content: str
     attachments: List = []
     user: str
+    created: str = None
 
 
 class CreateArticleResponse(BaseModel):
@@ -26,7 +29,10 @@ class UpdateArticleRequest(BaseModel):
     articleId: int
     title: str
     content: str
+    thumb: str = None
+    subcategoryId: str
     attachments: List = []
+    created: str = None
 
 
 class UpdateArticleResponse(CreateArticleResponse):
@@ -37,12 +43,18 @@ class DeleteArticleResponse(BaseModel):
     articleId: int
 
 
+class GetSubCategoriesResponse(BaseModel):
+    subcategories: List
+
+
 class GetArticleResponse(BaseModel):
     articleId: str
     title: str
     filename: str
     user: str
+    thumb: str = None
     category: str
+    subcategoryId: str
     created: str
     attachments: List
 
@@ -52,6 +64,7 @@ class GetArticleResponse(BaseModel):
 
 class GetArticlesResponse(BaseModel):
     articles: List[Dict]
+    subcategories: List
 
 
 class UploadImageRequest(BaseModel):
