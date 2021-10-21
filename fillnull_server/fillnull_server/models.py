@@ -86,3 +86,37 @@ class DeleteImagesRequest(BaseModel):
 
 class DeleteImagesResponse(BaseModel):
     images: List
+
+
+class GetJournalResponse(BaseModel):
+    journalId: int
+    journalInfo: Dict = None
+
+
+class CreateJournalResponse(BaseModel):
+    journalId: int
+
+
+class UpdateJournalRequest(BaseModel):
+    journalId: int
+
+
+class AddTimetableItemRequest(BaseModel):
+    journalId: int
+    date: str
+    time: str
+    title: str
+    description: str = None
+    user: str
+
+
+class AddTimetableItemResponse(BaseModel):
+    success: bool
+
+
+class DeleteTimetableItemResponse(BaseModel):
+    success: bool
+
+
+class GetTimetableItemsResponse(BaseModel):
+    items: List[Dict] = []

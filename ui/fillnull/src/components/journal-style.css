@@ -1,0 +1,44 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  display: 'flex';
+  alignItems: 'center';
+  flexWrap: 'wrap';
+}
+.list {
+  margin-top: 10px;
+  box-shadow: var(--box-shadow);
+  display: 'flex';
+  alignItems: 'center';
+  flexWrap: 'wrap';
+  color: #333;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  margin-left: 5px;
+  text-align: start;
+}
+
+.icon {
+  cursor: pointer;
+  color: #333;
+}
+.icon:hover {
+  color: red;
+}
+
+.complete {
+  background-color: #fff;
+  text-decoration: line-through;
+  margin-left: 30px;
+}
+
+.pending {
+  color: #333;
+  margin-left: 30px;
+}

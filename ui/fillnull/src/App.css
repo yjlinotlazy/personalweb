@@ -34,6 +34,12 @@
     margin-top: 25px;
 }
 
+.timetable {
+    margin-top: 0px;
+    width: 100%;
+
+}
+
 a {
   font-family:wenquanyi bitmap song, Verdana, Arial, Helvetica;
   text-decoration:none;
@@ -147,6 +153,10 @@ input[type="submit"] {
   width: 200px;
 }
 
+img {
+    border: 1px solid #6e4c10;
+}
+
 li {
 font-size: 16px;
     margin-bottom: 0.0ex;
@@ -201,8 +211,9 @@ h4 {
  color:#666;
  font-style:bolder;
  font-size: 15px;
- padding: 2px;
-	margin-top: 5px;
+ padding: 0px;
+ margin-top: 0px;
+ margin-bottom: 0px;
 
 }
 

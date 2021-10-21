@@ -43,6 +43,15 @@ async def create_article(request: CreateArticleRequest) -> CreateArticleResponse
 
     # Attach images
     _attach_images(request.attachments, result[0]["article_id"])
+
+    # If creating a journal article, link that to the journal id of same day
+    if request.category == "journal":
+        query = f"""
+        update journal
+        set article_id = {result[0]['article_id']}
+        where user = '{request.user}' and date='{request.title}'
+        """
+        sql.run_query(query, fetch=False, commit=True)
     return CreateArticleResponse(articleId=result[0]["article_id"], filepath=f"{request.user}/{request.category}/{filename}.txt")
 
 

@@ -7,14 +7,32 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import InfoIcon from '@material-ui/icons/Info';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { NavLink } from 'react-router-dom'
+import BrushIcon from '@material-ui/icons/Brush';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import HomeIcon from '@material-ui/icons/Home';
 
 
-const makeItem = (path, title) => {
+const makeItem = (path, title, icon="default") => {
+    let iconItem;
+    switch (icon) {
+        case "paint":
+            iconItem = (<BrushIcon />)
+            break;
+        case "music":
+            iconItem = (<MusicNoteIcon />)
+            break;
+        case "home":
+            iconItem = (<HomeIcon />)
+            break;
+        default:
+            iconItem = (<DescriptionIcon />)
+            break
+    }
     return (
     <NavLink exact to={path}>
     <ListItem button>
         <ListItemIcon>
-            <DescriptionIcon />
+            {iconItem}
         </ListItemIcon>
         <ListItemText primary={title} />
     </ListItem>
@@ -25,22 +43,23 @@ const makeItem = (path, title) => {
 export const mainListItems = {
     demo: (
         <div>
-            {makeItem("/", "首页")}
+            {makeItem("/", "首页", "home")}
             {makeItem("/words", "聊聊")}
+            {makeItem("/journal", "journal")}
         </div>
     ),
     prod: (
         <div>
-            {makeItem("/", "首页")}
+            {makeItem("/", "首页", "home")}
             {makeItem("/words", "聊聊")}
-            {makeItem("/doodle", "画画")}
-            {makeItem("/listen", "听听")}
+            {makeItem("/doodle", "画画", "paint")}
+            {makeItem("/listen", "听听", "music")}
         </div>
     ),
     family: (
         <div>
-            {makeItem("/", "首页")}
-            {makeItem("/dairy", "家图")}
+            {makeItem("/", "首页", "home")}
+            {makeItem("/journal", "家图")}
         </div>
     )
 };

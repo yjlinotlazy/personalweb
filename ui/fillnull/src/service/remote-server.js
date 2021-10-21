@@ -64,5 +64,29 @@ export const Server = {
         getCode() {
             return client.get(`misc/${Config.user}`);
         }
+    },
+    journal: {
+        get(date) {
+            return client.get(`journal/calender/${Config.user}/${date}`)
+        },
+        post(date) {
+            return client.post(`journal/calender/${Config.user}/${date}`)
+        },
+    },
+    timetable: {
+        get(journalId) {
+            return client.get(`journal/timetable/${journalId}`)
+        },
+        post(data) {
+            return client.post('journal/timetable', { ...data, user: Config.user }, {
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+        },
+        delete(timetableId) {
+            return client.delete(`journal/timetable/${timetableId}`)
+        }
     }
 }

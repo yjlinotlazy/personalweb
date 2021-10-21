@@ -117,6 +117,7 @@ function Editor(props) {
     } = useForm();
 
     const onSubmit = (data, e) => {
+        console.log(data)
         if (pageState === PageState.Uploading) {
             setError("Please try again after all images have been uploaded");
         } else {
@@ -135,7 +136,7 @@ function Editor(props) {
             } else {
                 const payload = {
                     category: type,
-                    title: data.title,
+                    title: data.title || initialValues.title,
                     filename: data.filename,
                     thumb: data.thumb,
                     subcategoryId: data.subcategoryId || initialValues.subcategoryId,
