@@ -18,11 +18,11 @@ function Router() {
             <Route exact path="/doodle" component={() => <ArticleList title="画画" category="doodle"/>} />
             <Route exact path="/listen" component={() => <ArticleList title="听听" category="listen"/>} />
             <Route exact path="/words" component={() => <ArticleList title="聊聊" category="words"/>} />
-            <Route exact path="/journal" component={() => <JournalCalender title="图日记" category="journal"/>} />
+            <ProtectedRoute exact path="/journal" component={() => <JournalCalender title="图日记" category="journal"/>} />
             <Route path="/words/:articleId" component={Article} />
             <Route path="/listen/:articleId" component={Article} />
             <Route path="/doodle/:articleId" component={Article} />
-            <Route path="/journal/:articleId" component={Article} />
+            <ProtectedRoute path="/journal/:articleId" component={Article} />
             <ProtectedRoute exact path="/create/:type" component={Editor} />
             <ProtectedRoute exact path="/update" component={Editor} />
         </Switch>

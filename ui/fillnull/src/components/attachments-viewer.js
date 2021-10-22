@@ -62,13 +62,13 @@ export default function AttachmentViewer(props) {
 
               actionIcon={
               <React.Fragment>
+                <IconButton onClick={e => onRemove(item.id)} value={item.id} className={classes.icon}>
+                  <CancelIcon color="secondary"/>
+                </IconButton>
                 <IconButton onClick={e => copyText(item.img)} value={item.img} className={classes.icon}>
                   <FileCopyIcon/>
                 </IconButton>
 
-                <IconButton onClick={e => onRemove(item.id)} value={item.id} className={classes.icon}>
-                  <CancelIcon color="secondary"/>
-                </IconButton>
                 </React.Fragment>
               }
             />

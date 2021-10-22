@@ -2,6 +2,7 @@ import React from "react";
 import NavigationDrawer from "./components/navigation-drawer"
 import Router from './routes/router'
 import {makeStyles, CssBaseline } from "@material-ui/core";
+import {Config} from './config';
 
 const useStyle = makeStyles(theme => ({
     root: {
@@ -29,7 +30,7 @@ function LandingPage() {
         <div className={classes.root}>
             <CssBaseline/>
 
-            <NavigationDrawer mobileOpen={false}/>
+            { Config.user !== "family" && <NavigationDrawer mobileOpen={false}/>}
 
             <div className={classes.content}>
                 <Router className={classes.root}/>

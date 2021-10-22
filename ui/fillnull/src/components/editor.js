@@ -174,10 +174,6 @@ function Editor(props) {
         }
     }
 
-    const handlePreviewOpen = () => {
-        setPreview(true);
-    };
-
     const handlePreviewClose = () => {
         setPreview(false);
     };

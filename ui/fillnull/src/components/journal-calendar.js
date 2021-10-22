@@ -14,14 +14,10 @@ import DatePicker from "react-datepicker";
 import Button from '@material-ui/core/Button';
 import Diary from './diary';
 import Timetable from './timetable';
+import TodoTable from './todo';
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const mark = [
-      '04-03-2020',
-      '03-03-2020',
-      '05-03-2020'
-  ]
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,12 +36,8 @@ const useStyles = makeStyles((theme) => ({
 const JournalCalender = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState();
   const [journalData, setJournalData] = useState({});
-  const [journalId, setJournalId] = useState();
   const [selectedDay, setSelectedDay] = useState(new Date());
-  const [images, setImages] = useState([]);
-  const [created, setCreated] = useState(new Date());
   const hist = useHistory();
 
   const onCreateDiary = (e) => {
@@ -53,12 +45,12 @@ const JournalCalender = () => {
         pathname: `/create/journal`,
         state: {
             title: dateToString(selectedDay),
-            content: content,
+            content: "",
             articleId: -1,
             category: "journal",
-            created: created,
+            created: new Date(),
             subcategoryId: 13,
-            images: images,
+            images: [],
         }
      })
   }
@@ -99,7 +91,6 @@ const JournalCalender = () => {
     Server.journal
         .get(dateToString(selectedDay))
         .then((response) => {
-            setJournalId(response.data.journalId)
             setJournalData(response.data.journalInfo)
             setLoading(false);
         })
@@ -129,8 +120,6 @@ const JournalCalender = () => {
           .then((response) => {
               if(mounted) {
                   const journalData = response.data.journalInfo;
-                  console.log(journalData)
-                  setJournalId(response.data.journalId)
                   setJournalData(journalData)
                   setLoading(false)
               }
@@ -153,39 +142,40 @@ const JournalCalender = () => {
             </div>
             )
     } else if (journalData && Object.keys(journalData).length > 0) {
-        console.log("rendering", journalData)
-        let topBar;
+        let botton;
         if (journalData.article_id) {
-            topBar = (
+            botton = (
               <React.Fragment>
-                <TopBar title="瓜籽瓜籽" onUpdate={onUpdateDiary}/>
+                <Button style={{background:"#e0f0bd",display:"inline"}} onClick={onUpdateDiary} color="inherit">再想想</Button>
               </React.Fragment>
             )
         } else {
-           topBar = (
-             <React.Fragment>
-               <TopBar title="瓜籽瓜籽" onClick={onCreateDiary}/>
-             </React.Fragment>
-           )
+           botton = (
+            <React.Fragment>
+              <Button style={{background:"#f3f7df",display:"inline"}} onClick={onCreateDiary} color="inherit">我有灵感</Button>
+            </React.Fragment>
+          )
         }
         return (
             <div>
-              {topBar}
               <div>
-
-                <Container maxWidth="sm" className="main">
-                    <DatePicker selected={selectedDay} onChange={(date) => setSelectedDay(date)} />
+                <Container maxWidth="sm" wrap='nowrap' align="center" display="inline">
+                    <DatePicker style={{display:"inline"}} selected={selectedDay} onChange={(date) => setSelectedDay(date)} />
                 </Container>
                 <Container>
-                <Grid container spacing={0} alignItems="stretch">
+                <Grid container spacing={0}>
                   <Grid item xs={6}>
                     <Paper className={classes.paper}>
                     { journalData.article_id && <Diary articleId={journalData.article_id}></Diary> }
                     </Paper>
+                    {botton}
                   </Grid>
                   <Grid item xs={6}>
-                    <Paper className={classes.paper}>
+                    <Paper className="timetable">
                       <Timetable journalId={journalData.journal_id} date={dateToString(selectedDay)}/>
+                    </Paper>
+                    <Paper className="todo">
+                      <TodoTable journalId={journalData.journal_id} date={dateToString(selectedDay)}/>
                     </Paper>
                   </Grid>
                  </Grid>
@@ -198,11 +188,11 @@ const JournalCalender = () => {
             <div>
               <div className="flex-container">
 
-                <Container maxWidth="sm" className="main">
+                <Container maxWidth="sm" className="main" align="center">
                     <DatePicker selected={selectedDay}onChange={(date) => setSelectedDay(date)} />
                 </Container>
-                <Container maxWidth="lg" className="main">
-                <Button style={{background:"#e0f0bd"}} onClick={() => onNewJournal(selectedDay)} color="inherit">新的一天走起</Button>
+                <Container maxWidth="lg" className="main" align="center">
+                <Button style={{background:"#e0f0bd"}} onClick={() => onNewJournal(selectedDay)} color="inherit"><h1>新的一天走起</h1></Button>
                 </Container>
               </div>
             </div>

@@ -88,5 +88,32 @@ export const Server = {
         delete(timetableId) {
             return client.delete(`journal/timetable/${timetableId}`)
         }
+    },
+    todo: {
+        get(journalId) {
+                return client.get(`journal/todo/${Config.user}/${journalId}`)
+        },
+        create(data) {
+            return client.post('journal/todo/create', { ...data, user: Config.user }, {
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+        },
+        update(data) {
+            return client.post('journal/todo/update', { ...data, user: Config.user }, {
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+        },
+        delete(todoId) {
+            return client.delete(`journal/todo/${todoId}`)
+        },
+        toggle(todoId) {
+            return client.post(`journal/todo/toggle/${todoId}`)
+        }
     }
 }

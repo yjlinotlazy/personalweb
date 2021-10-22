@@ -8,6 +8,12 @@ from fillnull_server.models import (
     UpdateJournalRequest,
     GetJournalResponse,
     GetTimetableItemsResponse,
+    AddTodoItemRequest,
+    UpdateTodoItemRequest,
+    AddTodoItemResponse,
+    GetTodoItemsResponse,
+    DeleteTodoResponse,
+    ToggleTodoResponse,
 )
 
 from fillnull_server import journal_handler as handler
@@ -34,3 +40,26 @@ async def add_timetable(request: AddTimetableItemRequest):
 @journal_router.delete("/timetable/{timetable_id}", operation_id="deleteTimetable", response_model=DeleteTimetableItemResponse)
 async def delete_timetable(timetable_id: int):
     return await handler.delete_timetable(timetable_id)
+
+@journal_router.delete("/todo/{todo_id}", operation_id="deleteTodoItem", response_model=DeleteTodoResponse)
+async def delete_todo(todo_id: int):
+    return await handler.delete_todo(todo_id)
+
+
+@journal_router.get("/todo/{user}/{journal_id}", operation_id="getTodos", response_model=GetTodoItemsResponse)
+async def get_todos(user: str, journal_id: int):
+    return await handler.get_todos(user, journal_id)
+
+
+@journal_router.post("/todo/create", operation_id="addTodo", response_model=AddTodoItemResponse)
+async def add_todo(request: AddTodoItemRequest):
+    return await handler.add_todo(request)
+
+
+@journal_router.post("/todo/update", operation_id="updateTodo", response_model=AddTodoItemResponse)
+async def update_todo(todo_id, request: UpdateTodoItemRequest):
+    return await handler.update_todo(todo_id, request)
+
+@journal_router.post("/todo/toggle/{todo_id}", operation_id="switchTodo", response_model=ToggleTodoResponse)
+async def switch_todo(todo_id: int):
+    return await handler.toggle_todo(todo_id)

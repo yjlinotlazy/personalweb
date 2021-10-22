@@ -110,6 +110,25 @@ class AddTimetableItemRequest(BaseModel):
     user: str
 
 
+class AddTodoItemRequest(BaseModel):
+    journalId: int
+    created: str = None
+    title: str
+    description: str = None
+    user: str
+
+
+class UpdateTodoItemRequest(BaseModel):
+    todoId: int
+    title: str
+    description: str = None
+
+
+class AddTodoItemResponse(BaseModel):
+    success: bool
+    error: str = None
+
+
 class AddTimetableItemResponse(BaseModel):
     success: bool
 
@@ -120,3 +139,16 @@ class DeleteTimetableItemResponse(BaseModel):
 
 class GetTimetableItemsResponse(BaseModel):
     items: List[Dict] = []
+
+
+class GetTodoItemsResponse(BaseModel):
+    items: List[Dict] = []
+
+
+class DeleteTodoResponse(BaseModel):
+    success: bool
+    error: str = None
+
+
+class ToggleTodoResponse(BaseModel):
+    completed: str = None

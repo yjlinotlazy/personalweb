@@ -37,7 +37,19 @@
 .timetable {
     margin-top: 0px;
     width: 100%;
+    background-color: #fadef9;
+}
 
+.todo {
+    margin-top: 0px;
+    width: 100%;
+    background-color: #d4ecfc;
+}
+
+.diary {
+    margin-top: 0px;
+    width: 100%;
+    background-color: #ece9e1;
 }
 
 a {
@@ -207,14 +219,21 @@ H2 {
 
 
 h4 {
-
  color:#666;
  font-style:bolder;
- font-size: 15px;
+ font-size: 25px;
  padding: 0px;
  margin-top: 0px;
  margin-bottom: 0px;
+}
 
+h5 {
+ color:#666;
+ font-style:bolder;
+ font-size: 20px;
+ padding: 0px;
+ margin-top: 0px;
+ margin-bottom: 0px;
 }
 
 .react-datepicker__time-list-item {

@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+
 const Preview = ({ meta, cancel, remove }) => {
     const { percent, status } = meta
 
@@ -21,6 +22,7 @@ const Preview = ({ meta, cancel, remove }) => {
 export const ImageUploader = (props) => {
     // specify upload params and url for your files
     const getUploadParams = ({ meta, file }) => {
+        console.log("file", file, meta)
         const split = meta.previewUrl.split("/");
         const filename = split[split.length - 1];
         return {
